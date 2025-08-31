@@ -1,49 +1,85 @@
 import os
+import time
 
 print("Hello World!")
 
 
-while True:
-    if os.name == "nt":
-        os.system("cls")
-    else:
-        os.system("clear")
 
-    print("\n To exit use CTRL + C")
-    try:
-        answer = 0
-        num1 = float(input("Please enter the first number: "))
-        operator = input("Please enter operator (+ - / *  % ** // ): ")
-        num2 = float(input("Please enter your second number: "))
 
+class Calculator:
+
+    def __init__(self):
+        """Initialise attributes"""
+        self.calculation_history = []
+
+    def clear_console(self):
+        if os.name == "nt":
+            os.system("cls")
+        else:
+            os.system("clear")
+
+    def calculate_answer(self,num1,num2,operator):
         if operator == "+":
-            answer = num1 + num2
+            return  num1 + num2
         elif operator == "-":
-            answer = num1 - num2
+            return num1 - num2
         elif operator == "*":
-            answer = num1 * num2
+            return num1 * num2
         elif operator == "/":
-            answer = num1 / num2
+            return num1 / num2
         elif operator == "%":
-            answer == num1 % num2
+            return num1 % num2
         elif operator == "**":
-            answer = num1 ** num2
+            return num1 ** num2
         elif operator == "//":
-            answer = num1 // num2
+            return num1 // num2
         else:
             print("Not a valid operator!")
-            
-        print(f"Answer: {answer}")
 
-        restart = input("Do you want to continue? (Y/N): ")
-        restart = restart.upper()
-        if restart == "Y":
-            continue
-        else:
-            break
+    def run_calculator(self):
+        try:
+            self.clear_console()
 
-    except ValueError:
-        print("Invalid format!")
+            print("\n To exit use CTRL + C")
 
-    except ZeroDivisionError:
-        print("Cannot divide by zero!")
+            if len(self.calculation_history) > 0:
+                print(f"Calculation History:")
+                print(self.calculation_history)
+            else:
+                print(f"No previous calculations at the moment!")
+
+            print("\n")
+
+            answer = 0
+            num1 = float(input("Please enter the first number: "))
+            operator = input("Please enter operator (+ - / *  % ** // ): ")
+            num2 = float(input("Please enter your second number: "))
+
+            answer = self.calculate_answer(num1, num2, operator)
+
+            if answer is None:
+                time.sleep(2)
+                self.run_calculator()
+                return
+
+
+            print(f"Answer {answer}")
+
+            self.calculation_history.append(answer)
+
+            restart = input("Do you want to continue? (Y/N): ")
+            restart = restart.upper()
+            if restart == "Y":
+                self.run_calculator()
+            else:
+                print("Closing program!")
+
+        except ValueError:
+            print("Invalid Format!")
+        except ZeroDivisionError:
+            print("Cannot divide by zero")
+
+
+calc = Calculator()
+
+calc.run_calculator()
