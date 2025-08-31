@@ -13,7 +13,7 @@ while True:
     try:
         answer = 0
         num1 = float(input("Please enter the first number: "))
-        operator = input("Please enter operator (+/-/%/*): ")
+        operator = input("Please enter operator (+ - / *  % ** // ): ")
         num2 = float(input("Please enter your second number: "))
 
         if operator == "+":
@@ -24,6 +24,12 @@ while True:
             answer = num1 * num2
         elif operator == "/":
             answer = num1 / num2
+        elif operator == "%":
+            answer == num1 % num2
+        elif operator == "**":
+            answer = num1 ** num2
+        elif operator == "//":
+            answer = num1 // num2
         else:
             print("Not a valid operator!")
             
