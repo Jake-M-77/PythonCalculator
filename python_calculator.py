@@ -44,7 +44,8 @@ class Calculator:
 
             if len(self.calculation_history) > 0:
                 print(f"Calculation History:")
-                print(self.calculation_history)
+                for calculation in self.calculation_history:
+                    print(calculation)
             else:
                 print(f"No previous calculations at the moment!")
 
@@ -65,6 +66,9 @@ class Calculator:
 
             print(f"Answer {answer}")
 
+            if len(self.calculation_history) > 6:
+                self.calculation_history.pop(0)
+
             self.calculation_history.append(answer)
 
             restart = input("Do you want to continue? (Y/N): ")
@@ -76,8 +80,12 @@ class Calculator:
 
         except ValueError:
             print("Invalid Format!")
+            time.sleep(2)
+            self.run_calculator()
         except ZeroDivisionError:
             print("Cannot divide by zero")
+            time.sleep(2)
+            self.run_calculator()
 
 
 calc = Calculator()
