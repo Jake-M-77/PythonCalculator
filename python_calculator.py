@@ -88,6 +88,6 @@ class Calculator:
             self.run_calculator()
 
 
-calc = Calculator()
+# calc = Calculator()
 
-calc.run_calculator()
+# calc.run_calculator()
